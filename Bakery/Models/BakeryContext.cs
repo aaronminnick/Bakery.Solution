@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjectName.Models
+namespace Bakery.Models
 {
   public class BakeryContext : IdentityDbContext<ApplicationUser>
   {
