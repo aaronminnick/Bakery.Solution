@@ -21,3 +21,21 @@ em {
 .initially-hidden {
   display: none;
 }
+
+.match-origin {
+  color: green;
+  font-weight: bold;
+}
+
+.match-target {
+  color: yellowgreen;
+  font-weight: bold;
+}
+
+li {
+  list-style: none;
+}
+
+.ft-checked:before {
+  content: '✓';
+}

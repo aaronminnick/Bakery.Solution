@@ -9,6 +9,7 @@
   @Html.DisplayFor(model => model.Description)
   @if (User.Identity.IsAuthenticated)
     {
+      <hr />
       <button type="button" class="btn btn-dark btn-sm" id="edit-button">Edit or Delete</button>
     }
 </div>

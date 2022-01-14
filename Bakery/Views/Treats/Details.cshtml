@@ -4,6 +4,7 @@
 
 @model Bakery.Models.Treat
 
+<h2>@Model.Description's Details:</h2>
 <div id="details-div">
   @Html.DisplayNameFor(model => model.Description)
   @Html.DisplayFor(model => model.Description)
@@ -11,6 +12,7 @@
   @Html.DisplayFor(model => model.Price)
   @if (User.Identity.IsAuthenticated)
     {
+      <hr />
       <button type="button" class="btn btn-dark btn-sm" id="edit-button">Edit or Delete</button>
     }
 </div>
@@ -35,6 +37,9 @@
     }
     <button type="button" class="btn btn-dark btn-sm" id="cancel-delete-button">Cancel deletion</button>
   </div>
+</div>
+<div id="flavor-treats-div">
+  @await Html.PartialAsync("_FlavorTreatsPartial", Model, ViewData)
 </div>
 
 <script src="~/js/details.js"></script>

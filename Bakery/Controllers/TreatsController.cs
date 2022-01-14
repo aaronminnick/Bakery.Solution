@@ -29,7 +29,11 @@ namespace Bakery.Controllers
 
     public ActionResult Details(int id)
     {
-      Treat model = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+      ViewData["flavors"] = _db.Flavors.ToList();
+      Treat model = _db.Treats
+        .Include(treat => treat.FlavorTreats)
+        .ThenInclude(ft => ft.Flavor)
+        .FirstOrDefault(treat => treat.TreatId == id);
       return View(model);
     }
 
@@ -48,6 +52,33 @@ namespace Bakery.Controllers
       _db.Treats.Remove(target);
       _db.SaveChanges();
       return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public PartialViewResult AddFlavorTreat(int TreatId, int FlavorId)
+    {
+      _db.FlavorTreats.Add(new FlavorTreat() {FlavorId = FlavorId, TreatId = TreatId});
+      _db.SaveChanges();
+      ViewData["flavors"] = _db.Flavors.ToList();
+      Treat model = _db.Treats
+        .Include(treat => treat.FlavorTreats)
+        .ThenInclude(ft => ft.Flavor)
+        .FirstOrDefault(treat => treat.TreatId == TreatId);
+      return PartialView("_FlavorTreatsPartial", model);
+    }
+
+    [HttpPost]
+    public PartialViewResult RemoveFlavorTreat(int TreatId, int FlavorId)
+    {
+      FlavorTreat target = _db.FlavorTreats.FirstOrDefault(ft => ft.FlavorId == FlavorId && ft.TreatId == TreatId);
+      _db.FlavorTreats.Remove(target);
+      _db.SaveChanges();
+      ViewData["flavors"] = _db.Flavors.ToList();
+      Treat model = _db.Treats
+        .Include(treat => treat.FlavorTreats)
+        .ThenInclude(ft => ft.Flavor)
+        .FirstOrDefault(treat => treat.TreatId == TreatId);
+      return PartialView("_FlavorTreatsPartial", model);
     }
   }
 }
