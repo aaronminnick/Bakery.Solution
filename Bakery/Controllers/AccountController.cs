@@ -40,7 +40,8 @@ namespace Bakery.Controllers
       }
       else
       {
-        return View(); // can we send back an error message / redirect to a "failed" page?
+        ViewBag.Message="Failed to register, please ensure username and password are valid.";
+        return View();
       }
     }
 
@@ -59,7 +60,8 @@ namespace Bakery.Controllers
       }
       else
       {
-        return View(); // again, status failed message or redirect?
+        ViewBag.Message="Failed to log in, please ensure username and password are valid.";
+        return View();
       }
     }
 

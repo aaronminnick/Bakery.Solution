@@ -16,3 +16,7 @@
 
   <button class="btn btn-dark" type="submit">Log in</button>
 }
+
+@if (ViewBag.Message != null) {
+  <p>@ViewBag.Message</p>
+}
