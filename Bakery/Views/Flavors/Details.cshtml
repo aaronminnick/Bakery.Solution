@@ -33,5 +33,8 @@
     <button type="button" class="btn btn-dark btn-sm" id="cancel-delete-button">Cancel deletion</button>
   </div>
 </div>
+<div id="flavor-treats-div">
+  @await Html.PartialAsync("_FlavorTreatsPartial", Model, ViewData)
+</div>
 
 <script src="~/js/details.js"></script>

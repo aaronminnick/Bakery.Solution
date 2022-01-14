@@ -1,0 +1,42 @@
+@using Bakery.Models
+
+@model Bakery.Models.Flavor
+
+<h2>Treats with @Model.Description flavor:</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <p><em>You may modify assigned treats using the buttons.</em></p>
+  @foreach (Treat treat in ViewData["treats"] as List<Treat>)
+  {
+    if (Model.FlavorTreats.Where(ft => ft.TreatId == treat.TreatId).Count() > 0)
+    {
+      <li class="ft-checked">
+        @treat.Description
+        <button type="button" class="btn btn-dark btn-sm remove-ft-button">Remove</button>
+        <input class="treat-id" type="hidden" value=@treat.TreatId />
+        <input class="flavor-id" type="hidden" value=@Model.FlavorId />
+      </li>
+    }
+    else
+    {
+      <li>
+        @treat.Description
+        <button type="button" class="btn btn-dark btn-sm add-ft-button">Add</button>
+        <input class="treat-id" type="hidden" value=@treat.TreatId />
+        <input class="flavor-id" type="hidden" value=@Model.FlavorId />
+      </li>
+    }
+  }
+}
+else
+{
+<ul>
+  @foreach (FlavorTreat ft in Model.FlavorTreats)
+  {
+    <li>@ft.Treat.Description</li>
+  }
+</ul>
+}
+
+<script src="~/js/flavortreats.js"></script>

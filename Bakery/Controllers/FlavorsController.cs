@@ -1,10 +1,12 @@
 using Bakery.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Bakery.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly BakeryContext _db;
@@ -27,9 +29,14 @@ namespace Bakery.Controllers
       return RedirectToAction("Index", "Home");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
-      Flavor model = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      ViewData["treats"] = _db.Treats.ToList();
+      Flavor model = _db.Flavors
+        .Include(flavor => flavor.FlavorTreats)
+        .ThenInclude(ft => ft.Treat)
+        .FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(model);
     }
 
@@ -48,6 +55,33 @@ namespace Bakery.Controllers
       _db.Flavors.Remove(target);
       _db.SaveChanges();
       return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public PartialViewResult AddFlavorTreat(int TreatId, int FlavorId)
+    {
+      _db.FlavorTreats.Add(new FlavorTreat() {FlavorId = FlavorId, TreatId = TreatId});
+      _db.SaveChanges();
+      ViewData["treats"] = _db.Treats.ToList();
+      Flavor model = _db.Flavors
+        .Include(flavor => flavor.FlavorTreats)
+        .ThenInclude(ft => ft.Treat)
+        .FirstOrDefault(flavor => flavor.FlavorId == FlavorId);
+      return PartialView("_FlavorTreatsPartial", model);
+    }
+
+    [HttpPost]
+    public PartialViewResult RemoveFlavorTreat(int TreatId, int FlavorId)
+    {
+      FlavorTreat target = _db.FlavorTreats.FirstOrDefault(ft => ft.FlavorId == FlavorId && ft.TreatId == TreatId);
+      _db.FlavorTreats.Remove(target);
+      _db.SaveChanges();
+      ViewData["treats"] = _db.Treats.ToList();
+      Flavor model = _db.Flavors
+        .Include(flavor => flavor.FlavorTreats)
+        .ThenInclude(ft => ft.Treat)
+        .FirstOrDefault(flavor => flavor.FlavorId == FlavorId);
+      return PartialView("_FlavorTreatsPartial", model);
     }
   }
 }

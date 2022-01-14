@@ -1,10 +1,12 @@
 using Bakery.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Bakery.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
@@ -27,6 +29,7 @@ namespace Bakery.Controllers
       return RedirectToAction("Index", "Home");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       ViewData["flavors"] = _db.Flavors.ToList();
