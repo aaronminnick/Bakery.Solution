@@ -1,8 +1,19 @@
+em {
+  font-size: .8em;;
+}
+
 .bottom-bar {
-  position: -webkit-sticky;
-  top: 80vh;
+  position: fixed;
+  top: 85vh;
+  border: 2px solid grey;
+  padding: 1em;
 }
 
 .bottom-bar p {
   display: inline;
+  padding-right: 1.2em;
+}
+
+.container {
+  margin-top: 5vh;
 }

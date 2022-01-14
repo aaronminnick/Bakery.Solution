@@ -13,15 +13,15 @@
       @RenderBody()
       <div class="bottom-bar">
         <p>@Html.ActionLink("Home", "Index", "Home")</p>
+        <p>@Html.ActionLink("Account Management", "Index", "Account")</p>
         @if (User.Identity.IsAuthenticated)
         {
-          <p>(Logged in as @User.Identity.Name.)</p>
+          <p><em>(Logged in as @User.Identity.Name.)</em></p>
         }
         else
         {
-          <p>(Using site as a guest.)</p>
+          <p><em>(Using site as a guest.)</em></p>
         }
-        <p><em>@Html.ActionLink("Account Management", "Index", "Account")</em></p>
       </div>
     </div>
   </body>

@@ -2,4 +2,34 @@
   Layout = "_Layout";
 }
 
+@using Bakery.Models
+
 <h2>Welcome to the Bakery.</h2>
+<div class="row">
+  <div class="col-6">
+    <h4>Treats:</h4>
+    @if (User.Identity.IsAuthenticated)
+    {
+      <p><em>@Html.ActionLink("Create a new Treat", "Create", "Treats")</em></p>
+    }
+    <ul>
+      @foreach (Treat treat in ViewBag.Treats)
+      {
+        <li></li>
+      }
+    </ul>
+  </div>
+  <div class="col-6">
+    <h4>Flavors:</h4>
+    @if (User.Identity.IsAuthenticated)
+    {
+      <p><em>@Html.ActionLink("Create a new Flavor", "Create", "Flavors")</em></p>
+    }
+    <ul>
+      @foreach (Flavor flavor in ViewBag.Flavors)
+      {
+        <li></li>
+      }
+    </ul>
+  </div>
+</div>
