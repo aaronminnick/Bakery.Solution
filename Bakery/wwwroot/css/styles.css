@@ -17,3 +17,7 @@ em {
 .container {
   margin-top: 5vh;
 }
+
+.initially-hidden {
+  display: none;
+}
