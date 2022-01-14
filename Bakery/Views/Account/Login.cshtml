@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.ViewModels.LoginViewModel
+
+<h4>Bakery Login</h4>
+<hr />
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.UserName)
+  @Html.TextBoxFor(model => model.UserName)
+
+  @Html.LabelFor(model => model.Password)
+  @Html.PasswordFor(model => model.Password)
+
+  <button class="btn btn-dark" type="submit">Log in</button>
+}

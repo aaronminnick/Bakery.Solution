@@ -1,0 +1,8 @@
+.bottom-bar {
+  position: -webkit-sticky;
+  top: 80vh;
+}
+
+.bottom-bar p {
+  display: inline;
+}
