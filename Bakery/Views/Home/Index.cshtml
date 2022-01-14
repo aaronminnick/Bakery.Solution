@@ -13,9 +13,15 @@
       <p><em>@Html.ActionLink("Create a new Treat", "Create", "Treats")</em></p>
     }
     <ul>
+      
       @foreach (Treat treat in ViewBag.Treats)
       {
-        <li>@treat.Description - $@treat.Price <em>@Html.ActionLink("Details", "Details", "Treats", new {id = treat.TreatId})</em></li>
+        string flavorTreats = "";
+        @foreach (FlavorTreat ft in treat.FlavorTreats)
+        {
+          flavorTreats += ft.FlavorId.ToString();
+        }
+        <li id='@("T"+treat.TreatId)' data-flavortreats=@flavorTreats>@treat.Description - $@treat.Price <em>@Html.ActionLink("Details", "Details", "Treats", new {id = treat.TreatId})</em></li>
       }
     </ul>
   </div>
@@ -28,8 +34,30 @@
     <ul>
       @foreach (Flavor flavor in ViewBag.Flavors)
       {
-        <li>@flavor.Description <em>@Html.ActionLink("Details", "Details", "Flavors", new {id = flavor.FlavorId})</em></li>
+        <li id='@("F"+flavor.FlavorId)'>@flavor.Description <em>@Html.ActionLink("Details", "Details", "Flavors", new {id = flavor.FlavorId})</em></li>
       }
     </ul>
   </div>
 </div>
+
+<script>
+$("li").filter(function() {
+  return this.id.match(/^T/);
+}).hover(
+  function() {
+    $(this).addClass("match-origin");
+    let targets = $(this).data("flavortreats").toString().split("");
+    targets.forEach((target) => {
+      $(`#F${target}`).addClass("match-target");
+    });
+  },
+  function() {
+    $(this).removeClass("match-origin");
+    let targets = $(this).data("flavortreats").toString().split("");
+    console.log(targets);
+    targets.forEach((target) => {
+      $(`#F${target}`).removeClass("match-target");
+    });
+  }
+);
+</script>
