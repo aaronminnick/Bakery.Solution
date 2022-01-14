@@ -5,6 +5,7 @@
 @using Bakery.Models
 
 <h2>Welcome to the Bakery.</h2>
+<hr />
 <div class="row">
   <div class="col-6">
     <h4>Treats:</h4>
@@ -37,52 +38,14 @@
         string flavorTreats2 = "";
         @foreach (FlavorTreat ft in flavor.FlavorTreats)
         {
-          flavorTreats2 += ft.FlavorId.ToString();
+          flavorTreats2 += ft.TreatId.ToString();
         }
         <li id='@("F"+flavor.FlavorId)' data-flavortreats=@flavorTreats2>@flavor.Description <em>@Html.ActionLink("Details", "Details", "Flavors", new {id = flavor.FlavorId})</em></li>
       }
     </ul>
   </div>
 </div>
+<hr />
+<p><em>Tip: hover over an item to see its matching flavors / treats.</em></p>
 
-<script>
-$("li").filter(function() {
-  return this.id.match(/^T/);
-}).hover(
-  function() {
-    $(this).addClass("match-origin");
-    let targets = $(this).data("flavortreats").toString().split("");
-    targets.forEach((target) => {
-      $(`#F${target}`).addClass("match-target");
-    });
-  },
-  function() {
-    $(this).removeClass("match-origin");
-    let targets = $(this).data("flavortreats").toString().split("");
-    console.log(targets);
-    targets.forEach((target) => {
-      $(`#F${target}`).removeClass("match-target");
-    });
-  }
-);
-
-$("li").filter(function() {
-  return this.id.match(/^F/);
-}).hover(
-  function() {
-    $(this).addClass("match-origin");
-    let targets = $(this).data("flavortreats").toString().split("");
-    targets.forEach((target) => {
-      $(`#T${target}`).addClass("match-target");
-    });
-  },
-  function() {
-    $(this).removeClass("match-origin");
-    let targets = $(this).data("flavortreats").toString().split("");
-    console.log(targets);
-    targets.forEach((target) => {
-      $(`#T${target}`).removeClass("match-target");
-    });
-  }
-);
-</script>
+<script src="~/js/index.js"></script>

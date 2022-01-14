@@ -1,10 +1,13 @@
+body {
+  background-color: blanchedalmond;
+}
+
 em {
   font-size: .8em;;
 }
 
 .bottom-bar {
-  position: fixed;
-  top: 85vh;
+  margin-top: 5em;
   border: 2px solid grey;
   padding: 1em;
 }
@@ -15,7 +18,10 @@ em {
 }
 
 .container {
-  margin-top: 5vh;
+  padding-top: 2em;
+  min-height: 100vh;
+  background-color: ivory;
+  border: 1px lightcoral solid;
 }
 
 .initially-hidden {
