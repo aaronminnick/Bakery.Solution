@@ -8,10 +8,10 @@
 <hr />
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.UserName)
+  @Html.LabelFor(model => model.UserName, "User Name: ")
   @Html.TextBoxFor(model => model.UserName)
 
-  @Html.LabelFor(model => model.Password)
+  @Html.LabelFor(model => model.Password, "Password: ")
   @Html.PasswordFor(model => model.Password)
 
   <button class="btn btn-dark" type="submit">Log in</button>

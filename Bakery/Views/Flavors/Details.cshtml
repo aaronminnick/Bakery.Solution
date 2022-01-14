@@ -6,7 +6,7 @@
 
 <h2>@Model.Description's Details:</h2>
 <div id="details-div">
-  @Html.DisplayNameFor(model => model.Description)
+  @Html.LabelFor(model => model.Description, "Description: ")
   @Html.DisplayFor(model => model.Description)
   @if (User.Identity.IsAuthenticated)
     {
@@ -18,7 +18,7 @@
   @using (Html.BeginForm("Edit", "Flavors"))
   {
     @Html.HiddenFor(model => model.FlavorId)
-    @Html.LabelFor(model => model.Description)
+    @Html.LabelFor(model => model.Description, "Description: ")
     @Html.EditorFor(model => model.Description)
     <button type="submit" class="btn btn-dark btn-sm">Submit changes</button>
   }

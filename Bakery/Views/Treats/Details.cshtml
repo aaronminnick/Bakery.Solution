@@ -6,9 +6,9 @@
 
 <h2>@Model.Description's Details:</h2>
 <div id="details-div">
-  @Html.DisplayNameFor(model => model.Description)
+  @Html.LabelFor(model => model.Description, "Description: ")
   @Html.DisplayFor(model => model.Description)
-  @Html.DisplayNameFor(model => model.Price)
+  @Html.LabelFor(model => model.Price, "Price: $")
   @Html.DisplayFor(model => model.Price)
   @if (User.Identity.IsAuthenticated)
     {
@@ -20,9 +20,9 @@
   @using (Html.BeginForm("Edit", "Treats"))
   {
     @Html.HiddenFor(model => model.TreatId)
-    @Html.LabelFor(model => model.Description)
+    @Html.LabelFor(model => model.Description, "Description: ")
     @Html.EditorFor(model => model.Description)
-    @Html.DisplayNameFor(model => model.Price)
+    @Html.LabelFor(model => model.Price, "Price: $")
     @Html.TextBoxFor(model => model.Price, new {@type = "number", @step = ".01", @min = "0", @Value = Model.Price})
     <button type="submit" class="btn btn-dark btn-sm">Submit changes</button>
   }

@@ -6,9 +6,9 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Description)
+  @Html.LabelFor(model => model.Description, "Description: ")
   @Html.TextBoxFor(model => model.Description, new {@required = "required"})
-  @Html.LabelFor(model => model.Price)
+  @Html.LabelFor(model => model.Price, "Price: $")
   @Html.TextBoxFor(model => model.Price, new {@type = "number", @step = ".01", @min = "0"})
   <button class="btn btn-dark" type="submit">Create Treat</button>
 }
