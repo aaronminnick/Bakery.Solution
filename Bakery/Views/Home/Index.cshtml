@@ -28,7 +28,7 @@
     <ul>
       @foreach (Flavor flavor in ViewBag.Flavors)
       {
-        <li>@flavor.Description</li>
+        <li>@flavor.Description <em>@Html.ActionLink("Details", "Details", "Flavors", new {id = flavor.FlavorId})</em></li>
       }
     </ul>
   </div>

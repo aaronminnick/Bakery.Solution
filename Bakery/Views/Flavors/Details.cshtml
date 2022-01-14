@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor
+
+<div id="details-div">
+  @Html.DisplayNameFor(model => model.Description)
+  @Html.DisplayFor(model => model.Description)
+  @if (User.Identity.IsAuthenticated)
+    {
+      <button type="button" class="btn btn-dark btn-sm" id="edit-button">Edit or Delete</button>
+    }
+</div>
+<div id="edit-div" class="initially-hidden">
+  @using (Html.BeginForm("Edit", "Flavors"))
+  {
+    @Html.HiddenFor(model => model.FlavorId)
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+    <button type="submit" class="btn btn-dark btn-sm">Submit changes</button>
+  }
+  <button type="button" class="btn btn-dark btn-sm" id="cancel-edit-button">Cancel editing</button>
+  <button type="button" class="btn btn-dark btn-sm" id="delete-button">Delete</button>
+  <div id="delete-confirm-div" class="initially-hidden">
+    <h5>Are you sure you want to delete this Flavor?</h5>
+    @using (Html.BeginForm("Delete", "Flavors"))
+    {
+      @Html.HiddenFor(model => model.FlavorId)
+      <button type="submit" class="btn btn-danger btn-sm">Confirm deletion</button>
+    }
+    <button type="button" class="btn btn-dark btn-sm" id="cancel-delete-button">Cancel deletion</button>
+  </div>
+</div>
+
+<script src="~/js/details.js"></script>

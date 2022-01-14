@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description, new {@required = "required"})
+  <button class="btn btn-dark" type="submit">Create Flavor</button>
+}
