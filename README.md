@@ -62,4 +62,4 @@ n/a at this time
 _Thanks for reading! Please feel free to contact me with feedback!_
 ***
 #### [License: MIT](https://opensource.org/licenses/MIT)
-#### Copyright (c) 2021 Aaron Minnick
+#### Copyright (c) 2022 Aaron Minnick
